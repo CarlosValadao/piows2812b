@@ -2,6 +2,7 @@
 #define WS2812B_H
 
 #include <stdint.h>
+#include "hardware/pio.h"
 
 #define WS2812B_PIN 7
 #define RED         0
@@ -22,29 +23,35 @@
  *        ***************
  *        *** ATENCAO ***
  *        ***************
- *       Todos os plots nesta matriz é feito em um retângulo 5x3
+ *       Todos os plots nesta matriz é feito em um quadrado 3x3
  *       posições onde se encontra o #
  * 
+ *           . . . . .
  *           . # # # .
  *           . # # # .
  *           . # # # .
- *           . # # # .
- *           . # # # .   
+ *           . . . . .   
  *
  * @author Carlos Valadao
  * @date 23/01/2025
  */
 
-typedef struct
-{
-    uint8_t color;
-    uint8_t intensity;
-    const uint8_t *matrix;
+typedef struct {
+    PIO pio;
+    uint state_machine_id;
+    uint8_t out_pin;
 } ws2812b_t;
 
+typedef struct {
+    uint8_t *pattern;
+    uint8_t intensity;
+    uint8_t color;
+    bool is_flipped;
+} led_shape_t;
 
-uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity);
-void ws2812b_draw(const ws2812b_t *ws2812b_ptr);
-void ws2812b_turn_off();
+ws2812b_t *init_ws2812b(PIO pio, uint8_t pin);
+void ws2812b_draw(const ws2812b_t *ws, led_shape_t *shape);
+void ws2812b_turn_off_all(const ws2812b_t *ws);
+void send_ws2812b_data(PIO pio, uint sm, uint32_t data);
 
-#endif
+#endif // WS2812B
