@@ -39,6 +39,17 @@ int main()
     uint16_t i;
     uint32_t valor_led;
     double r = 0.0, b = 0.0 , g = 0.0;
+    uint8_t pattern[] = {
+        1, 1, 1, 1, 1,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0
+    };
+
+    led_shape_t shape = {.pattern = pattern, .color = YELLOW, .intensity = 25};
+
+    ws2812b_t *ws = NULL;
 
     //coloca a frequência de clock para 128 MHz, facilitando a divisão pelo clock
     ok = set_sys_clock_khz(128000, false);
@@ -50,9 +61,10 @@ int main()
     if (ok) printf("clock set to %ld\n", clock_get_hz(clk_sys));
 
     //configurações da PIO
-    uint offset = pio_add_program(pio, &pio_matrix_program);
-    uint sm = pio_claim_unused_sm(pio, true);
-    pio_matrix_program_init(pio, sm, offset, OUT_PIN);
+    // uint offset = pio_add_program(pio, &pio_matrix_program);
+    // uint sm = pio_claim_unused_sm(pio, true);
+    // pio_matrix_program_init(pio, sm, offset, OUT_PIN);
+    ws = init_ws2812b(pio, OUT_PIN);
 
     //inicializar o botão de interrupção - GPIO5
     gpio_init(button_0);
@@ -61,8 +73,12 @@ int main()
 
     //interrupção da gpio habilitada
     gpio_set_irq_enabled_with_callback(button_0, GPIO_IRQ_EDGE_FALL, 1, & gpio_irq_handler);
-
+    buzzer_init_default();
     while (true) {
+        //buzzer_beep_default(1000, 300);
+        //send_ws2812b_data(ws->pio, ws->state_machine_id, 68280);
+        //ws2812b_draw(ws, &shape);
+        //ws2812b_turn_off_all(ws);
         sleep_ms(500);
         printf("\nfrequeência de clock %ld\r\n", clock_get_hz(clk_sys));
     }
