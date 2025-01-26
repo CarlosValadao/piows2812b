@@ -61,6 +61,7 @@ static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
     return composite_value;
 }
 
+
 void ws2812b_draw(const ws2812b_t *ws, const led_shape_t *shape)
 {
     if(!shape->is_flipped) fliplr(shape->pattern, shape);
@@ -74,6 +75,7 @@ void ws2812b_draw(const ws2812b_t *ws, const led_shape_t *shape)
         else send_ws2812b_data(ws->pio, ws->state_machine_id, 0);
     }
 }
+
 
 void ws2812b_turn_off_all(const ws2812b_t *ws)
 {
