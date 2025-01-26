@@ -16,25 +16,25 @@
  *       Todos os plots nesta matriz é feito em um quadrado 3x3
  *       posições onde se encontra o #
  * 
- *           . . . . .
  *           . # # # .
  *           . # # # .
  *           . # # # .
- *           . . . . .   
+ *           . # # # .
+ *           . # # # .   
  * 
  * @author Carlos Valadao
  * @date 23/01/2025
  */
 
-void ws2812b_motion_spin(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_sway(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_bounce(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_shift_left(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_shift_right(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_shift_up(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_shift_down(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_zoom(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_contract(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_pulse(const ws2812b_t *ws2812b_ptr);
+void ws2812b_motion_spin(led_shape_t *shape);
+void ws2812b_motion_sway(led_shape_t *shape);
+void ws2812b_motion_bounce(led_shape_t *shape);
+void ws2812b_motion_shift_left(led_shape_t *shape);
+void ws2812b_motion_shift_right(led_shape_t *shape);
+void ws2812b_motion_shift_up(led_shape_t *shape);
+void ws2812b_motion_shift_down(led_shape_t *shape);
+void ws2812b_motion_zoom(led_shape_t *shape);
+void ws2812b_motion_contract(led_shape_t *shape);
+void ws2812b_motion_pulse(led_shape_t *shape);
 
 #endif
