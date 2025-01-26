@@ -66,5 +66,7 @@ int main()
     while (true) {
         sleep_ms(500);
         printf("\nfrequeência de clock %ld\r\n", clock_get_hz(clk_sys));
+
+        //Adicionar o pulse na lógica do teclado como: ws2812b_motion_pulse(pio, sm);
     }
 }
