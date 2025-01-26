@@ -50,7 +50,7 @@ typedef struct {
 } led_shape_t;
 
 ws2812b_t *init_ws2812b(PIO pio, uint8_t pin);
-void ws2812b_draw(const ws2812b_t *ws, const led_shape_t *shape);
+void ws2812b_draw(const ws2812b_t *ws, led_shape_t *shape);
 void ws2812b_turn_off_all(const ws2812b_t *ws);
 void send_ws2812b_data(PIO pio, uint sm, uint32_t data);
 
