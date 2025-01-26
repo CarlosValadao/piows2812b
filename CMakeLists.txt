@@ -75,3 +75,22 @@ target_link_libraries(pio_matrix
 
 pico_add_extra_outputs(pio_matrix)
 
+SRC = \
+    src/main.c \
+    src/ws2812b.c \
+    src/keyboard4x4.c \
+    src/mlt8530.c \
+    src/pio_matrix.c
+
+HEADERS = \
+    include/ws2812b.h \
+    include/keyboard4x4.h \
+    include/mlt8530.h \
+    include/pio_matrix.pio.h
+
+CFLAGS = -Iinclude -Wall
+
+all: ws2812b_project
+
+ws2812b_project: $(SRC) $(HEADERS)
+    gcc $(CFLAGS) -o ws2812b_project $(SRC)
