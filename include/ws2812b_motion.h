@@ -13,14 +13,14 @@
  *        ***************
  *        *** ATENCAO ***
  *        ***************
- *       Todos os plots nesta matriz é feito em um retângulo 5x3
+ *       Todos os plots nesta matriz é feito em um quadrado 3x3
  *       posições onde se encontra o #
  * 
+ *           . . . . .
  *           . # # # .
  *           . # # # .
  *           . # # # .
- *           . # # # .
- *           . # # # .   
+ *           . . . . .   
  * 
  * @author Carlos Valadao
  * @date 23/01/2025
