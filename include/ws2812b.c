@@ -3,6 +3,26 @@
 #include "pio_matrix.pio.h"
 #include <stdlib.h>
 
+// flip the 5x5 matrix (to draw) on ws2812b
+static uint8_t *fliplr(uint8_t *matrix, led_shape_t *shape) {
+    uint8_t temp;
+    uint8_t i, j;
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 2; j++) {
+            // Calcula os índices da linha atual
+            uint8_t left = (i * 5) + j;
+            uint8_t right = (i * 5) + (4 - j);
+
+            // Inverte os elementos
+            temp = matrix[left];
+            matrix[left] = matrix[right];
+            matrix[right] = temp;
+        }
+    }
+    shape->is_flipped = true;
+    return matrix;
+}
+
 static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
 {
     uint32_t composite_value;
@@ -44,13 +64,15 @@ static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
 
 void ws2812b_draw(const ws2812b_t *ws, const led_shape_t *shape)
 {
+    if(!shape->is_flipped) fliplr(shape->pattern, shape);
     uint8_t i;
     uint32_t composite_value;
     for(i = 0; i < 25; i++) {
-        if(shape->pattern[i]) {
+        if(shape->pattern[24-i] == 1) {
             composite_value = ws2812b_compose_led_value(shape->color, shape->intensity);
             send_ws2812b_data(ws->pio, ws->state_machine_id, composite_value);
         }
+        else send_ws2812b_data(ws->pio, ws->state_machine_id, 0);
     }
 }
 

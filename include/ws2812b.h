@@ -46,6 +46,7 @@ typedef struct {
     uint8_t *pattern;
     uint8_t intensity;
     uint8_t color;
+    bool is_flipped;
 } led_shape_t;
 
 ws2812b_t *init_ws2812b(PIO pio, uint8_t pin);
