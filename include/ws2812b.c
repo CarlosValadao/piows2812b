@@ -6,19 +6,14 @@
 // flip the 5x5 matrix (to draw) on ws2812b
 static uint8_t *fliplr(uint8_t *matrix, led_shape_t *shape) {
     uint8_t temp;
-    uint8_t i, j;
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 2; j++) {
-            // Calcula os índices da linha atual
-            uint8_t left = (i * 5) + j;
-            uint8_t right = (i * 5) + (4 - j);
-
-            // Inverte os elementos
-            temp = matrix[left];
-            matrix[left] = matrix[right];
-            matrix[right] = temp;
-        }
-    }
+    temp = matrix[5];
+    matrix[5] = matrix[9]; matrix[9] = temp;
+    temp = matrix[6];
+    matrix[6] = matrix[8]; matrix[8] = temp;
+    temp = matrix[15];
+    matrix[15] = matrix[19]; matrix[19] = temp;
+    temp = matrix[16];
+    matrix[16] = matrix[18]; matrix[18] = temp;
     shape->is_flipped = true;
     return matrix;
 }
@@ -62,7 +57,7 @@ static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
 }
 
 
-void ws2812b_draw(const ws2812b_t *ws, const led_shape_t *shape)
+void ws2812b_draw(const ws2812b_t *ws, led_shape_t *shape)
 {
     if(!shape->is_flipped) fliplr(shape->pattern, shape);
     uint8_t i;
