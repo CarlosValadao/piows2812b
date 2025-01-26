@@ -9,9 +9,10 @@
 #include "include/keyboard4x4.h"
 #include "include/mlt8530.h"
 #include "include/ws2812b.h"
+#include "include/ws2812b_motion.h"
 
 //arquivo .pio
-#include "pio_matrix.pio.h"
+#include "build/pio_matrix.pio.h"
 
 //número de LEDs
 #define NUM_PIXELS 25

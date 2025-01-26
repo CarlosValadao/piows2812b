@@ -39,7 +39,7 @@ typedef struct
 {
     uint8_t color;
     uint8_t intensity;
-    const uint8_t *matrix;
+    uint8_t *matrix;
 } ws2812b_t;
 
 

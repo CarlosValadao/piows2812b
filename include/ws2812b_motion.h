@@ -2,6 +2,8 @@
 #define WS2812B_MOTION_H
 
 #include "ws2812b.h"
+#include "pico/stdlib.h"
+#include "hardware/pio.h"
 
 /** 
  * @file ws2812b.h
@@ -35,6 +37,6 @@ void ws2812b_motion_shift_up(const ws2812b_t *ws2812b_ptr);
 void ws2812b_motion_shift_down(const ws2812b_t *ws2812b_ptr);
 void ws2812b_motion_zoom(const ws2812b_t *ws2812b_ptr);
 void ws2812b_motion_contract(const ws2812b_t *ws2812b_ptr);
-void ws2812b_motion_pulse(const ws2812b_t *ws2812b_ptr);
+void ws2812b_motion_pulse(PIO pio, int sm);
 
 #endif
