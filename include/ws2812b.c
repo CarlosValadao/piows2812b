@@ -41,6 +41,7 @@ static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
     return composite_value;
 }
 
+
 void ws2812b_draw(const ws2812b_t *ws, const led_shape_t *shape)
 {
     uint8_t i;
@@ -52,6 +53,7 @@ void ws2812b_draw(const ws2812b_t *ws, const led_shape_t *shape)
         }
     }
 }
+
 
 void ws2812b_turn_off_all(const ws2812b_t *ws)
 {
