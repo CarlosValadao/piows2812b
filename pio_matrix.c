@@ -96,6 +96,7 @@ uint8_t pattern[25] = {
             }
         }
         */
+        //ws2812b_turn_off_all(ws);
         sleep_ms(500);
         printf("\nfrequeência de clock %ld\r\n", clock_get_hz(clk_sys));
     }
