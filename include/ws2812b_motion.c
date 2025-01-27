@@ -45,6 +45,7 @@ static void transpose(uint8_t *arr)
     }
 }
 
+
 void ws2812b_motion_spin(led_shape_t *shape)
 {
     return;
