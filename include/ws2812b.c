@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 // flip the 5x5 matrix (to draw) on ws2812b
-static uint8_t *fliplr(uint8_t *matrix, led_shape_t *shape) {
+static void fliplr(uint8_t *matrix, led_shape_t *shape) {
     uint8_t temp;
     temp = matrix[5];
     matrix[5] = matrix[9]; matrix[9] = temp;
@@ -15,7 +15,6 @@ static uint8_t *fliplr(uint8_t *matrix, led_shape_t *shape) {
     temp = matrix[16];
     matrix[16] = matrix[18]; matrix[18] = temp;
     shape->is_flipped = true;
-    return matrix;
 }
 
 static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
@@ -74,8 +73,8 @@ void ws2812b_draw(const ws2812b_t *ws, led_shape_t *shape)
 
 void ws2812b_turn_off_all(const ws2812b_t *ws)
 {
-    uint8_t i = 25;
-    while (i--) send_ws2812b_data(ws->pio, ws->state_machine_id, 0);
+    uint8_t i;
+    for(i = 0; i > 25; i++) send_ws2812b_data(ws->pio, ws->state_machine_id, 0);
 }
 
 void send_ws2812b_data(PIO pio, uint sm, uint32_t data)
