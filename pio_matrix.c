@@ -63,10 +63,35 @@ int main()
     //interrupção da gpio habilitada
     gpio_set_irq_enabled_with_callback(button_0, GPIO_IRQ_EDGE_FALL, 1, & gpio_irq_handler);
 
+    //Definição dos pinos do teclado
+    uint columns[4] = {16, 18, 19, 20};
+    uint rows[4] = {21, 22, 26, 27};
+    char KEY_MAP[16] = {
+        '1', '2', '3', 'A',
+        '4', '5', '6', 'B',
+        '7', '8', '9', 'C',
+        '*', '0', '#', 'D'
+    };
+
+    keyboard4x4 *keyboard = keyboard_init(columns, rows, KEY_MAP);
+    char key = '\0';
+
     while (true) {
         sleep_ms(500);
-        printf("\nfrequeência de clock %ld\r\n", clock_get_hz(clk_sys));
+        /*printf("\nfrequencia de clock %ld\r\n", clock_get_hz(clk_sys));*/
 
-        //Adicionar o pulse na lógica do teclado como: ws2812b_motion_pulse(pio, sm);
+        //Obter a tecla pressionada
+        key = keyboard_get_pressed_key(keyboard);
+
+        //Se a tecla não for nula, imprime a tecla pressionada
+        if (key != '\0') {
+            printf("Tecla pressionada: %c\n", key);
+            //Executa a função de acordo à tecla pressionada
+            if (key == '6') {
+                printf("Chamando ws2812b_motion_pulse\n");
+                ws2812b_motion_pulse(pio, sm);
+                printf("ws2812b_motion_pulse chamada\n");
+            }
+        }
     }
 }
