@@ -21,6 +21,13 @@ static void right_shift(uint8_t *arr)
     arr[0] = 0;
 }
 
+static void left_shift(uint8_t *arr)
+{
+    uint8_t i;
+    for(i = 0; i < 4; i++) arr[i] = arr[i+1];
+    arr[4] = 0;
+}
+
 void ws2812b_motion_spin(led_shape_t *shape)
 {
     return;
@@ -38,13 +45,15 @@ void ws2812b_motion_bounce(led_shape_t *shape)
 
 void ws2812b_motion_shift_left(led_shape_t *shape)
 {
-    return;
+    uint8_t i;
+    fliplr(shape->pattern);
+    for(i = 0; i < 5; i++) left_shift(&(shape->pattern[5 * i]));
+    fliplr(shape->pattern);
 }
 
 void ws2812b_motion_shift_right(led_shape_t *shape)
 {
     uint8_t i;
-    uint8_t j;
     fliplr(shape->pattern);
     for(i = 0; i < 5; i++) right_shift(&(shape->pattern[5 * i]));
     fliplr(shape->pattern);
