@@ -1,6 +1,7 @@
 #include "ws2812b_motion.h"
 #include <string.h>
 #include <stdlib.h>
+#include "pico/stdlib.h"
 
 
 static void fliplr(uint8_t *glyph) {
@@ -116,4 +117,44 @@ void ws2812b_motion_contract(uint8_t *glyph)
 void ws2812b_motion_pulse(uint8_t *glyph)
 {
     return;
+}
+
+void ws2812b_motion_slide_left(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity)
+{
+    uint8_t i;
+    uint8_t *shifted_glyph = malloc(25 * sizeof(uint8_t));
+    uint8_t *aux_glyph = malloc(25 * sizeof(uint8_t));
+    memcpy(aux_glyph, glyph, 25 * sizeof(uint8_t));
+    ws2812b_draw(ws, glyph, color, intensity);
+    sleep_ms(500);
+    ws2812b_turn_off_all(ws);
+    sleep_ms(50);
+    for(i = 0; i < 4; i++)
+    {
+        ws2812b_motion_shift_left(aux_glyph, shifted_glyph);
+        ws2812b_draw(ws, shifted_glyph, color, intensity);
+        memcpy(aux_glyph, shifted_glyph, 25 * sizeof(uint8_t));
+        sleep_ms(500);
+        ws2812b_turn_off_all(ws);
+        sleep_ms(50);
+    }
+    sleep_ms(20);
+    ws2812b_draw(ws, glyph, color, intensity);
+    free(shifted_glyph);
+    free(aux_glyph);
+}
+
+void ws2812b_motion_slide_right(uint8_t *glyph, uint8_t color, uint8_t intensity)
+{
+    // TO DO
+}
+
+void ws2812b_motion_slide_up(uint8_t *glyph, uint8_t color, uint8_t intensity)
+{
+    // TO DO
+}
+
+void ws2812b_motion_slide_down(uint8_t *glyph, uint8_t color, uint8_t intensity)
+{
+    // TO DO
 }
