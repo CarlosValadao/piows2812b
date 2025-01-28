@@ -46,63 +46,68 @@ static void transpose(uint8_t *arr)
 }
 
 
-void ws2812b_motion_spin(led_shape_t *shape)
+void ws2812b_motion_spin(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     return;
 }
 
-void ws2812b_motion_sway(led_shape_t *shape)
+void ws2812b_motion_sway(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     return;
 }
 
-void ws2812b_motion_bounce(led_shape_t *shape)
+void ws2812b_motion_bounce(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     return;
 }
 
-void ws2812b_motion_shift_left(led_shape_t *shape)
+void ws2812b_motion_shift_left(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     uint8_t i;
-    fliplr(shape->pattern);
-    for(i = 0; i < 5; i++) left_shift(&(shape->pattern[5 * i]));
-    fliplr(shape->pattern);
+    fliplr(glyph);
+    for(i = 0; i < 5; i++) left_shift(&(glyph[5 * i]));
+    fliplr(glyph);
 }
 
-void ws2812b_motion_shift_right(led_shape_t *shape)
+void ws2812b_motion_shift_right(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     uint8_t i;
-    fliplr(shape->pattern);
-    for(i = 0; i < 5; i++) right_shift(&(shape->pattern[5 * i]));
-    fliplr(shape->pattern);
+    fliplr(glyph);
+    for(i = 0; i < 5; i++) right_shift(&(glyph[5 * i]));
+    fliplr(glyph);
 }
 
-void ws2812b_motion_shift_up(led_shape_t *shape)
+void ws2812b_motion_shift_up(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     uint8_t i;
-    fliplr(shape->pattern);
-    transpose(shape->pattern);
-    for(i = 0; i < 5; i++) left_shift(&(shape->pattern[5 * i]));
-    transpose(shape->pattern);
-    fliplr(shape->pattern);
+    fliplr(glyph);
+    transpose(glyph);
+    for(i = 0; i < 5; i++) left_shift(&(glyph[5 * i]));
+    transpose(glyph);
+    fliplr(glyph);
 }
 
-void ws2812b_motion_shift_down(led_shape_t *shape)
+void ws2812b_motion_shift_down(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+{
+    uint8_t i;
+    fliplr(glyph);
+    transpose(glyph);
+    for(i = 0; i < 5; i++) right_shift(&(glyph[5 * i]));
+    transpose(glyph);
+    fliplr(glyph);
+}
+
+void ws2812b_motion_zoom(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     return;
 }
 
-void ws2812b_motion_zoom(led_shape_t *shape)
+void ws2812b_motion_contract(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     return;
 }
 
-void ws2812b_motion_contract(led_shape_t *shape)
-{
-    return;
-}
-
-void ws2812b_motion_pulse(led_shape_t *shape)
+void ws2812b_motion_pulse(const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
     return;
 }
