@@ -10,6 +10,7 @@
 #include "include/mlt8530.h"
 #include "include/ws2812b.h"
 #include "include/ws2812b_definitions.h"
+#include "include/ws2812b_motion.h"
 
 //arquivo .pio
 #include "pio_matrix.pio.h"
@@ -74,6 +75,9 @@ int main()
     buzzer_init_default();
     ws2812b_turn_off_all(ws);
     uint k;
+
+    uint8_t glyph[25] = {0}; 
+
     while (true) {
         //buzzer_beep_default(1000, 300);
         //send_ws2812b_data(ws->pio, ws->state_machine_id, 68280);
@@ -97,4 +101,6 @@ int main()
        }
         printf("\nfrequeência de clock %ld\r\n", clock_get_hz(clk_sys));
     }
+
+    return 0;
 }

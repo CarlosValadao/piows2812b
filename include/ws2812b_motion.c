@@ -1,5 +1,10 @@
 #include "ws2812b_motion.h"
+#include "ws2812b.h"
 #include "ws2812b_definitions.h"
+#include "pico/stdlib.h"
+#include "hardware/pio.h"
+
+volatile bool stop_pulse = false;
 
 
 static void fliplr(uint8_t *glyph) {
@@ -109,13 +114,15 @@ uint8_t *ws2812b_motion_contract(uint8_t *glyph)
     return;
 }
 
-uint8_t *ws2812b_motion_pulse(uint8_t *glyph)
+uint8_t *ws2812b_motion_pulse(ws2812b_t *ws, uint8_t *glyph)
 {
-    const uint8_t *heart_glyphs[] = {HEART_SMALL, HEART_MEDIUM, HEART_LARGE};
+    const uint8_t *heart_glyphs[] = { HEART_SMALL, HEART_MEDIUM, HEART_LARGE };
     uint8_t size_index = 0;
     int8_t direction = 1; // 1: crescente, -1: decrescente
 
-    while (1)
+    stop_pulse = false;
+
+    while (!stop_pulse)
     {
         // Atualiza o size_index
         size_index += direction;
@@ -126,6 +133,7 @@ uint8_t *ws2812b_motion_pulse(uint8_t *glyph)
 
         //transpose(glyph);
         //fliplr(glyph);
+        ws2812b_draw(ws, glyph, RED, 1);
 
         sleep_ms(100);
     }
