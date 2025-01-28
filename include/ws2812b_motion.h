@@ -26,15 +26,15 @@
  * @date 23/01/2025
  */
 
-void ws2812b_motion_spin(led_shape_t *shape);
-void ws2812b_motion_sway(led_shape_t *shape);
-void ws2812b_motion_bounce(led_shape_t *shape);
-void ws2812b_motion_shift_left(led_shape_t *shape);
-void ws2812b_motion_shift_right(led_shape_t *shape);
-void ws2812b_motion_shift_up(led_shape_t *shape);
-void ws2812b_motion_shift_down(led_shape_t *shape);
-void ws2812b_motion_zoom(led_shape_t *shape);
-void ws2812b_motion_contract(led_shape_t *shape);
-void ws2812b_motion_pulse(led_shape_t *shape);
+void ws2812b_motion_spin(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_sway(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_bounce(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_left(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_right(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_up(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_down(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_zoom(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_contract(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_pulse(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
 
 #endif
