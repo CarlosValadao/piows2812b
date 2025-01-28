@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 // flip the 5x5 matrix (to draw) on ws2812b
-static void fliplr(uint8_t *matrix, led_shape_t *shape) {
+static void fliplr(uint8_t *matrix) {
     uint8_t temp;
     temp = matrix[5];
     matrix[5] = matrix[9]; matrix[9] = temp;
@@ -14,7 +14,6 @@ static void fliplr(uint8_t *matrix, led_shape_t *shape) {
     matrix[15] = matrix[19]; matrix[19] = temp;
     temp = matrix[16];
     matrix[16] = matrix[18]; matrix[18] = temp;
-    shape->is_flipped = true;
 }
 
 static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
@@ -56,14 +55,13 @@ static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
 }
 
 
-void ws2812b_draw(const ws2812b_t *ws, led_shape_t *shape)
+void ws2812b_draw(const ws2812b_t *ws, const uint8_t *glyph, const uint8_t color, const uint8_t intensity)
 {
-    if(!shape->is_flipped) fliplr(shape->pattern, shape);
     uint8_t i;
     uint32_t composite_value;
     for(i = 0; i < 25; i++) {
-        if(shape->pattern[24-i] == 1) {
-            composite_value = ws2812b_compose_led_value(shape->color, shape->intensity);
+        if(glyph[24-i] == 1) {
+            composite_value = ws2812b_compose_led_value(color, intensity);
             send_ws2812b_data(ws->pio, ws->state_machine_id, composite_value);
         }
         else send_ws2812b_data(ws->pio, ws->state_machine_id, 0);
@@ -124,4 +122,9 @@ ws2812b_t *init_ws2812b(PIO pio, uint8_t pin)
     ws->state_machine_id = sm;
     ws->pio = pio;
     return ws;
+}
+
+void prepare_glyph(uint8_t *glyph)
+{
+    fliplr(glyph);
 }
