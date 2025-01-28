@@ -40,6 +40,6 @@ void ws2812b_motion_pulse(uint8_t *glyph);
 void ws2812b_motion_slide_left(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
 void ws2812b_motion_slide_right(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
 void ws2812b_motion_slide_up(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
-void ws2812b_motion_slide_down(uint8_t *glyph, uint8_t color, uint8_t intensity);
+void ws2812b_motion_slide_down(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
 
 #endif
