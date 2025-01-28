@@ -9,6 +9,7 @@
 #include "include/keyboard4x4.h"
 #include "include/mlt8530.h"
 #include "include/ws2812b.h"
+#include "include/ws2812b_definitions.h"
 
 //arquivo .pio
 #include "pio_matrix.pio.h"
@@ -42,17 +43,6 @@ int main()
     uint32_t valor_led;
     uint8_t *map = NULL;
 
-uint8_t pattern[25] = {
-    0, 1, 1, 1, 0,
-    0, 1, 0, 1, 0,
-    0, 1, 0, 1, 0,
-    0, 1, 0, 1, 0,
-    0, 1, 1, 1, 0
-};
-
-
-    led_shape_t shape = {.pattern = pattern, .color = PURPLE, .intensity = 1, .is_flipped = false};
-
     ws2812b_t *ws = NULL;
 
     //coloca a frequência de clock para 128 MHz, facilitando a divisão pelo clock
@@ -83,6 +73,7 @@ uint8_t pattern[25] = {
     gpio_set_irq_enabled_with_callback(button_0, GPIO_IRQ_EDGE_FALL, 1, & gpio_irq_handler);
     buzzer_init_default();
     ws2812b_turn_off_all(ws);
+    uint k;
     while (true) {
         //buzzer_beep_default(1000, 300);
         //send_ws2812b_data(ws->pio, ws->state_machine_id, 68280);
@@ -96,8 +87,14 @@ uint8_t pattern[25] = {
             }
         }
         */
-        //ws2812b_turn_off_all(ws);
-        sleep_ms(500);
+       for(k=0;k<10;k++)
+       {
+        ws2812b_draw(ws, NUMERIC_GLYPHS[k], PURPLE, 1);
+        sleep_ms(1500);
+        ws2812b_turn_off_all(ws);
+        
+        sleep_ms(50);
+       }
         printf("\nfrequeência de clock %ld\r\n", clock_get_hz(clk_sys));
     }
 }
