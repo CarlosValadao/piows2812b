@@ -89,7 +89,12 @@ void ws2812b_motion_shift_up(led_shape_t *shape)
 
 void ws2812b_motion_shift_down(led_shape_t *shape)
 {
-    return;
+    uint8_t i;
+    fliplr(shape->pattern);
+    transpose(shape->pattern);
+    for(i = 0; i < 5; i++) right_shift(&(shape->pattern[5 * i]));
+    transpose(shape->pattern);
+    fliplr(shape->pattern);
 }
 
 void ws2812b_motion_zoom(led_shape_t *shape)
