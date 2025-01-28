@@ -1,16 +1,16 @@
 #include "ws2812b_motion.h"
 
 
-static void fliplr(uint8_t *matrix) {
+static void fliplr(uint8_t *glyph) {
     uint8_t temp;
-    temp = matrix[5];
-    matrix[5] = matrix[9]; matrix[9] = temp;
-    temp = matrix[6];
-    matrix[6] = matrix[8]; matrix[8] = temp;
-    temp = matrix[15];
-    matrix[15] = matrix[19]; matrix[19] = temp;
-    temp = matrix[16];
-    matrix[16] = matrix[18]; matrix[18] = temp;
+    temp = glyph[5];
+    glyph[5] = glyph[9]; glyph[9] = temp;
+    temp = glyph[6];
+    glyph[6] = glyph[8]; glyph[8] = temp;
+    temp = glyph[15];
+    glyph[15] = glyph[19]; glyph[19] = temp;
+    temp = glyph[16];
+    glyph[16] = glyph[18]; glyph[18] = temp;
 }
 
 static void right_shift(uint8_t *arr)
@@ -46,30 +46,31 @@ static void transpose(uint8_t *arr)
 }
 
 
-void ws2812b_motion_spin(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_spin(uint8_t *glyph)
 {
     return;
 }
 
-void ws2812b_motion_sway(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_sway(uint8_t *glyph)
 {
     return;
 }
 
-void ws2812b_motion_bounce(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_bounce(uint8_t *glyph)
 {
     return;
 }
 
-void ws2812b_motion_shift_left(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_shift_left(uint8_t *glyph)
 {
     uint8_t i;
+    uint8_t flipped_glyph[5];
     fliplr(glyph);
     for(i = 0; i < 5; i++) left_shift(&(glyph[5 * i]));
     fliplr(glyph);
 }
 
-void ws2812b_motion_shift_right(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_shift_right(uint8_t *glyph)
 {
     uint8_t i;
     fliplr(glyph);
@@ -77,7 +78,7 @@ void ws2812b_motion_shift_right(uint8_t *glyph, const uint8_t color, const uint8
     fliplr(glyph);
 }
 
-void ws2812b_motion_shift_up(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_shift_up(uint8_t *glyph)
 {
     uint8_t i;
     fliplr(glyph);
@@ -87,7 +88,7 @@ void ws2812b_motion_shift_up(uint8_t *glyph, const uint8_t color, const uint8_t 
     fliplr(glyph);
 }
 
-void ws2812b_motion_shift_down(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_shift_down(uint8_t *glyph)
 {
     uint8_t i;
     fliplr(glyph);
@@ -97,17 +98,17 @@ void ws2812b_motion_shift_down(uint8_t *glyph, const uint8_t color, const uint8_
     fliplr(glyph);
 }
 
-void ws2812b_motion_zoom(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_zoom(uint8_t *glyph)
 {
     return;
 }
 
-void ws2812b_motion_contract(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_contract(uint8_t *glyph)
 {
     return;
 }
 
-void ws2812b_motion_pulse(uint8_t *glyph, const uint8_t color, const uint8_t intensity)
+uint8_t *ws2812b_motion_pulse(uint8_t *glyph)
 {
     return;
 }
