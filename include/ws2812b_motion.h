@@ -2,6 +2,7 @@
 #define WS2812B_MOTION_H
 
 #include "ws2812b.h"
+#include <stdint.h>
 
 /** 
  * @file ws2812b.h
@@ -26,15 +27,15 @@
  * @date 23/01/2025
  */
 
-uint8_t *ws2812b_motion_spin(uint8_t *glyph);
-uint8_t *ws2812b_motion_sway(uint8_t *glyph);
-uint8_t *ws2812b_motion_bounce(uint8_t *glyph);
-uint8_t *ws2812b_motion_shift_left(uint8_t *glyph);
-uint8_t *ws2812b_motion_shift_right(uint8_t *glyph);
-uint8_t *ws2812b_motion_shift_up(uint8_t *glyph);
-uint8_t *ws2812b_motion_shift_down(uint8_t *glyph);
-uint8_t *ws2812b_motion_zoom(uint8_t *glyph);
-uint8_t *ws2812b_motion_contract(uint8_t *glyph);
-uint8_t *ws2812b_motion_pulse(uint8_t *glyph);
+void ws2812b_motion_spin(uint8_t *glyph);
+void ws2812b_motion_sway(uint8_t *glyph);
+void ws2812b_motion_bounce(uint8_t *glyph);
+void ws2812b_motion_shift_left(uint8_t *glyph, uint8_t *shifted_glyph);
+void ws2812b_motion_shift_right(uint8_t *glyph, uint8_t *shifted_glyph);
+void ws2812b_motion_shift_up(uint8_t *glyph, uint8_t *shifted_glyph);
+void ws2812b_motion_shift_down(uint8_t *glyph, uint8_t *shifted_glyph);
+void ws2812b_motion_zoom(uint8_t *glyph);
+void ws2812b_motion_contract(uint8_t *glyph);
+void ws2812b_motion_pulse(uint8_t *glyph);
 
 #endif

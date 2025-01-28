@@ -1,4 +1,6 @@
 #include "ws2812b_motion.h"
+#include <string.h>
+#include <stdlib.h>
 
 
 static void fliplr(uint8_t *glyph) {
@@ -46,69 +48,72 @@ static void transpose(uint8_t *arr)
 }
 
 
-uint8_t *ws2812b_motion_spin(uint8_t *glyph)
+void ws2812b_motion_spin(uint8_t *glyph)
 {
     return;
 }
 
-uint8_t *ws2812b_motion_sway(uint8_t *glyph)
+void ws2812b_motion_sway(uint8_t *glyph)
 {
     return;
 }
 
-uint8_t *ws2812b_motion_bounce(uint8_t *glyph)
+void ws2812b_motion_bounce(uint8_t *glyph)
 {
     return;
 }
 
-uint8_t *ws2812b_motion_shift_left(uint8_t *glyph)
+void ws2812b_motion_shift_left(uint8_t *glyph, uint8_t *shifted_glyph)
 {
     uint8_t i;
-    uint8_t flipped_glyph[5];
-    fliplr(glyph);
-    for(i = 0; i < 5; i++) left_shift(&(glyph[5 * i]));
-    fliplr(glyph);
+    memcpy(shifted_glyph, glyph, 25 * sizeof(uint8_t));
+    fliplr(shifted_glyph);
+    for(i = 0; i < 5; i++) left_shift(&(shifted_glyph[5 * i]));
+    fliplr(shifted_glyph);
 }
 
-uint8_t *ws2812b_motion_shift_right(uint8_t *glyph)
+void ws2812b_motion_shift_right(uint8_t *glyph, uint8_t *shifted_glyph)
 {
     uint8_t i;
-    fliplr(glyph);
-    for(i = 0; i < 5; i++) right_shift(&(glyph[5 * i]));
-    fliplr(glyph);
+    memcpy(shifted_glyph, glyph, 25 * sizeof(uint8_t));
+    fliplr(shifted_glyph);
+    for(i = 0; i < 5; i++) right_shift(&(shifted_glyph[5 * i]));
+    fliplr(shifted_glyph);
 }
 
-uint8_t *ws2812b_motion_shift_up(uint8_t *glyph)
+void ws2812b_motion_shift_up(uint8_t *glyph, uint8_t *shifted_glyph)
 {
     uint8_t i;
-    fliplr(glyph);
-    transpose(glyph);
-    for(i = 0; i < 5; i++) left_shift(&(glyph[5 * i]));
-    transpose(glyph);
-    fliplr(glyph);
+    memcpy(shifted_glyph, glyph, 25 * sizeof(uint8_t));
+    fliplr(shifted_glyph);
+    transpose(shifted_glyph);
+    for(i = 0; i < 5; i++) left_shift(&(shifted_glyph[5 * i]));
+    transpose(shifted_glyph);
+    fliplr(shifted_glyph);
 }
 
-uint8_t *ws2812b_motion_shift_down(uint8_t *glyph)
+void ws2812b_motion_shift_down(uint8_t *glyph, uint8_t *shifted_glyph)
 {
     uint8_t i;
-    fliplr(glyph);
-    transpose(glyph);
-    for(i = 0; i < 5; i++) right_shift(&(glyph[5 * i]));
-    transpose(glyph);
-    fliplr(glyph);
+    memcpy(shifted_glyph, glyph, 25 * sizeof(uint8_t));
+    fliplr(shifted_glyph);
+    transpose(shifted_glyph);
+    for(i = 0; i < 5; i++) right_shift(&(shifted_glyph[5 * i]));
+    transpose(shifted_glyph);
+    fliplr(shifted_glyph);
 }
 
-uint8_t *ws2812b_motion_zoom(uint8_t *glyph)
+void ws2812b_motion_zoom(uint8_t *glyph)
 {
     return;
 }
 
-uint8_t *ws2812b_motion_contract(uint8_t *glyph)
+void ws2812b_motion_contract(uint8_t *glyph)
 {
     return;
 }
 
-uint8_t *ws2812b_motion_pulse(uint8_t *glyph)
+void ws2812b_motion_pulse(uint8_t *glyph)
 {
     return;
 }
