@@ -143,8 +143,7 @@ int main()
                     ws2812b_motion_slide_left(ws, ALL_LEDS_ON, WHITE, 100);
                     break;
             }
-            printf("%c\n", pressed_key);
         }
-    
+
     }
 }
