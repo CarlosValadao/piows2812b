@@ -46,5 +46,6 @@ ws2812b_t *init_ws2812b(PIO pio, uint8_t pin);
 void ws2812b_draw(const ws2812b_t *ws, const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
 void ws2812b_turn_off_all(const ws2812b_t *ws);
 void send_ws2812b_data(PIO pio, uint sm, uint32_t data);
+void prepare_glyph(uint8_t *glyph);
 
 #endif // WS2812B
