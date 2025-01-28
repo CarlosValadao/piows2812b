@@ -26,15 +26,15 @@
  * @date 23/01/2025
  */
 
-void ws2812b_motion_spin(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_sway(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_bounce(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_shift_left(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_shift_right(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_shift_up(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_shift_down(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_zoom(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_contract(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
-void ws2812b_motion_pulse(const uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_spin(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_sway(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_bounce(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_left(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_right(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_up(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_shift_down(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_zoom(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_contract(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
+void ws2812b_motion_pulse(uint8_t *glyph, const uint8_t color, const uint8_t intensity);
 
 #endif
