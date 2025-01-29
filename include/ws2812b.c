@@ -40,7 +40,7 @@ static uint32_t ws2812b_compose_led_value(uint8_t color, uint8_t intensity)
         composite_value = ((intensity_value << 8) | (intensity_value << 16));
         break;
     case WHITE:
-        intensity_value /= 3u;
+        intensity_value /= 2u;
         composite_value = ((intensity_value << 24) | (intensity_value << 16) | (intensity_value << 8));
         break;
     case BLUE_MARINE:
@@ -72,7 +72,7 @@ void ws2812b_draw(const ws2812b_t *ws, const uint8_t *glyph, const uint8_t color
 void ws2812b_turn_off_all(const ws2812b_t *ws)
 {
     uint8_t i;
-    for(i = 0; i > 25; i++) send_ws2812b_data(ws->pio, ws->state_machine_id, 0);
+    for(i = 0; i < 25; i++) send_ws2812b_data(ws->pio, ws->state_machine_id, 0);
 }
 
 void send_ws2812b_data(PIO pio, uint sm, uint32_t data)
