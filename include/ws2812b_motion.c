@@ -6,8 +6,51 @@
 #include <string.h>
 #include <stdlib.h>
 
-volatile bool stop_pulse = false;
+static void rotate_clockwise_matrix_90_deg(uint8_t matrix[25]) {
+    uint8_t temp[25];
 
+    // Transposta e inversão em um único passo no array unidimensional
+    for (uint8_t i = 0; i < 5; i++) {
+        for (uint8_t j = 0; j < 5; j++) {
+            temp[j * 5 + (5 - 1 - i)] = matrix[i * 5 + j];
+        }
+    }
+
+    // Copiar o resultado para o array original
+    for (uint8_t i = 0; i < 25; i++) {
+        matrix[i] = temp[i];
+    }
+}
+
+
+void rotate_clockwise_90_deg_glyph(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity)
+{
+    uint8_t k;
+    uint8_t *aux_glyph = malloc(sizeof(uint8_t) * 25);
+    //uint8_t *temp_glyph = malloc(sizeof(uint8_t) * 25);
+    memcpy(aux_glyph, glyph, sizeof(uint8_t) * 25);
+    for(k = 0; k < 4; k++)
+    {
+        ws2812b_draw(ws, aux_glyph, color, intensity);
+        rotate_clockwise_matrix_90_deg(aux_glyph);
+        //memcpy(aux_glyph, temp_glyph, sizeof(uint8_t) * 25);
+        sleep_ms(500);
+    }
+    //free(temp_glyph);
+    free(aux_glyph);
+}
+
+
+bool static has_right_side_colision(uint8_t *glyph)
+{
+    return (glyph[4] || glyph[9] || glyph[14] || glyph[19] || glyph[24]) ? true : false;
+}
+
+
+bool static has_left_side_colision(uint8_t *glyph)
+{
+    return (glyph[0] || glyph[5] || glyph[10] || glyph[15] || glyph[20]) ? true : false;
+}
 
 static void fliplr(uint8_t *glyph) {
     uint8_t temp;
@@ -53,6 +96,35 @@ static void transpose(uint8_t *arr)
     }
 }
 
+
+void ws2812b_motion_left_colision(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity)
+{
+    uint8_t k;
+    uint8_t *aux_glyph = malloc(25 * sizeof(uint8_t));
+    uint8_t *temp_glyph = malloc(25 * sizeof(uint8_t));
+    memcpy(aux_glyph, glyph, 25 * sizeof(uint8_t));
+    while(!has_left_side_colision(aux_glyph))
+    {
+        ws2812b_motion_shift_left(aux_glyph, temp_glyph);
+        ws2812b_draw(ws, aux_glyph, color, intensity);
+        memcpy(aux_glyph, temp_glyph, sizeof(uint8_t) * 25);
+        sleep_ms(500);
+    }
+    for(k = 0; k < 3; k++)
+    {
+        ws2812b_motion_shift_right(aux_glyph, temp_glyph);
+        ws2812b_draw(ws, aux_glyph, color, intensity);
+        memcpy(aux_glyph, temp_glyph, sizeof(uint8_t) * 25);
+        sleep_ms(500);
+    }
+    ws2812b_motion_shift_left(aux_glyph, temp_glyph);
+    ws2812b_draw(ws, aux_glyph, color, intensity);
+    memcpy(aux_glyph, temp_glyph, sizeof(uint8_t) * 25);
+    sleep_ms(500);
+    ws2812b_motion_shift_left(aux_glyph, temp_glyph);
+    free(aux_glyph);
+    free(temp_glyph);
+}
 
 void ws2812b_motion_spin(ws2812b_t *ws, uint8_t color, uint8_t intensity)
 {
@@ -129,10 +201,8 @@ uint8_t *ws2812b_motion_pulse(ws2812b_t *ws, uint8_t *glyph)
     const uint8_t *heart_glyphs[] = { HEART_SMALL, HEART_MEDIUM, HEART_LARGE };
     uint8_t size_index = 0;
     int8_t direction = 1; // 1: crescente, -1: decrescente
-
-    stop_pulse = false;
-
-    while (!stop_pulse)
+    uint8_t k = 8;
+    while (k--)
     {
         // Atualiza o size_index
         size_index += direction;
@@ -145,7 +215,7 @@ uint8_t *ws2812b_motion_pulse(ws2812b_t *ws, uint8_t *glyph)
         //fliplr(glyph);
         ws2812b_draw(ws, glyph, RED, 1);
 
-        sleep_ms(100);
+        sleep_ms(300);
     }
 
     return glyph;

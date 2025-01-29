@@ -27,7 +27,6 @@
  * @date 23/01/2025
  */
 
-extern volatile bool stop_pulse;
 
 void ws2812b_motion_spin(ws2812b_t *ws, uint8_t color, uint8_t intensity);
 void ws2812b_motion_sway(uint8_t *glyph);
@@ -43,5 +42,7 @@ void ws2812b_motion_slide_left(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uin
 void ws2812b_motion_slide_right(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
 void ws2812b_motion_slide_up(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
 void ws2812b_motion_slide_down(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
+void ws2812b_motion_left_colision(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
+void rotate_clockwise_90_deg_glyph(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8_t intensity);
 
 #endif
