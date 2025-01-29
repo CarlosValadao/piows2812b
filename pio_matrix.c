@@ -43,6 +43,7 @@ int main()
     uint16_t i;
     uint32_t valor_led;
     uint8_t *map = NULL;
+    uint8_t shifted_glyph[25];
 
     ws2812b_t *ws = NULL;
 
@@ -96,7 +97,10 @@ int main()
         ws2812b_draw(ws, NUMERIC_GLYPHS[k], PURPLE, 1);
         sleep_ms(1500);
         ws2812b_turn_off_all(ws);
-        
+        ws2812b_motion_shift_left(NUMERIC_GLYPHS[k], shifted_glyph);
+        ws2812b_draw(ws, shifted_glyph, GREEN, 1);
+        sleep_ms(1500);
+        ws2812b_turn_off_all(ws);
         sleep_ms(50);
        }
         printf("\nfrequeência de clock %ld\r\n", clock_get_hz(clk_sys));
