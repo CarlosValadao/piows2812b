@@ -103,6 +103,35 @@ static const uint8_t *NUMERIC_GLYPHS[] = {
     NINE_GLYPH
 };
 
+static const uint8_t HEART_SMALL[] = {
+    0, 0, 0, 0, 0,
+    0, 1, 0, 1, 0,
+    0, 1, 1, 1, 0,
+    0, 0, 1, 0, 0,
+};
+
+static const uint8_t HEART_MEDIUM[] = {
+    0, 0, 0, 0, 0,
+    0, 1, 0, 1, 0,
+    1, 1, 1, 1, 1,
+    0, 1, 1, 1, 0,
+    0, 0, 1, 0, 0,
+};
+
+static const uint8_t HEART_LARGE[] = {
+    0, 1, 0, 1, 0,
+    1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1,
+    0, 1, 1, 1, 0,
+    0, 0, 1, 0, 0,
+};
+
+static const uint8_t *HEART_GLYPHS[] = {
+    HEART_SMALL,
+    HEART_MEDIUM,
+    HEART_LARGE
+};
+
 //desenho do motion spin
 double spin_1[25] =   {0.8, 0.0, 0.0, 0.0, 0.0,
                         0.0, 0.0, 0.0, 0.0, 0.6, 
