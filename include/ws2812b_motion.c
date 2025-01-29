@@ -54,9 +54,14 @@ static void transpose(uint8_t *arr)
 }
 
 
-void ws2812b_motion_spin(uint8_t *glyph)
+void ws2812b_motion_spin(ws2812b_t *ws, uint8_t color, uint8_t intensity)
 {
-    return;
+    uint8_t k;
+    for(k = 0; k < 16; k++)
+    {
+        ws2812b_draw(ws, spins[k], color, intensity);
+        sleep_ms(250);
+    }
 }
 
 void ws2812b_motion_sway(uint8_t *glyph)
@@ -154,7 +159,7 @@ void ws2812b_motion_slide_left(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uin
     memcpy(aux_glyph, glyph, 25 * sizeof(uint8_t));
     ws2812b_draw(ws, glyph, color, intensity);
     sleep_ms(500);
-    ws2812b_turn_off_all(ws);
+    //ws2812b_turn_off_all(ws);
     sleep_ms(50);
     for(i = 0; i < 4; i++)
     {
@@ -162,11 +167,12 @@ void ws2812b_motion_slide_left(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uin
         ws2812b_draw(ws, shifted_glyph, color, intensity);
         memcpy(aux_glyph, shifted_glyph, 25 * sizeof(uint8_t));
         sleep_ms(500);
-        ws2812b_turn_off_all(ws);
+        //ws2812b_turn_off_all(ws);
         sleep_ms(50);
     }
     sleep_ms(20);
     ws2812b_draw(ws, glyph, color, intensity);
+    sleep_ms(200);
     free(shifted_glyph);
     free(aux_glyph);
 }
@@ -179,7 +185,7 @@ void ws2812b_motion_slide_right(ws2812b_t *ws, uint8_t *glyph, uint8_t color, ui
     memcpy(aux_glyph, glyph, 25 * sizeof(uint8_t));
     ws2812b_draw(ws, glyph, color, intensity);
     sleep_ms(500);
-    ws2812b_turn_off_all(ws);
+    //ws2812b_turn_off_all(ws);
     sleep_ms(50);
     for(i = 0; i < 4; i++)
     {
@@ -187,11 +193,12 @@ void ws2812b_motion_slide_right(ws2812b_t *ws, uint8_t *glyph, uint8_t color, ui
         ws2812b_draw(ws, shifted_glyph, color, intensity);
         memcpy(aux_glyph, shifted_glyph, 25 * sizeof(uint8_t));
         sleep_ms(500);
-        ws2812b_turn_off_all(ws);
+        //ws2812b_turn_off_all(ws);
         sleep_ms(50);
     }
     sleep_ms(20);
     ws2812b_draw(ws, glyph, color, intensity);
+    sleep_ms(200);
     free(shifted_glyph);
     free(aux_glyph);
 }
@@ -204,7 +211,7 @@ void ws2812b_motion_slide_up(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8
     memcpy(aux_glyph, glyph, 25 * sizeof(uint8_t));
     ws2812b_draw(ws, glyph, color, intensity);
     sleep_ms(500);
-    ws2812b_turn_off_all(ws);
+    //ws2812b_turn_off_all(ws);
     sleep_ms(50);
     for(i = 0; i < 4; i++)
     {
@@ -212,11 +219,12 @@ void ws2812b_motion_slide_up(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uint8
         ws2812b_draw(ws, shifted_glyph, color, intensity);
         memcpy(aux_glyph, shifted_glyph, 25 * sizeof(uint8_t));
         sleep_ms(500);
-        ws2812b_turn_off_all(ws);
+        //ws2812b_turn_off_all(ws);
         sleep_ms(50);
     }
     sleep_ms(20);
     ws2812b_draw(ws, glyph, color, intensity);
+    sleep_ms(200);
     free(shifted_glyph);
     free(aux_glyph);
 }
@@ -229,7 +237,7 @@ void ws2812b_motion_slide_down(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uin
     memcpy(aux_glyph, glyph, 25 * sizeof(uint8_t));
     ws2812b_draw(ws, glyph, color, intensity);
     sleep_ms(500);
-    ws2812b_turn_off_all(ws);
+    //ws2812b_turn_off_all(ws);
     sleep_ms(50);
     for(i = 0; i < 4; i++)
     {
@@ -237,11 +245,12 @@ void ws2812b_motion_slide_down(ws2812b_t *ws, uint8_t *glyph, uint8_t color, uin
         ws2812b_draw(ws, shifted_glyph, color, intensity);
         memcpy(aux_glyph, shifted_glyph, 25 * sizeof(uint8_t));
         sleep_ms(500);
-        ws2812b_turn_off_all(ws);
+        //ws2812b_turn_off_all(ws);
         sleep_ms(50);
     }
     sleep_ms(20);
     ws2812b_draw(ws, glyph, color, intensity);
+    sleep_ms(200);
     free(shifted_glyph);
     free(aux_glyph);
 }
