@@ -29,7 +29,7 @@
 
 extern volatile bool stop_pulse;
 
-void ws2812b_motion_spin(uint8_t *glyph);
+void ws2812b_motion_spin(ws2812b_t *ws, uint8_t color, uint8_t intensity);
 void ws2812b_motion_sway(uint8_t *glyph);
 void ws2812b_motion_bounce(uint8_t *glyph);
 void ws2812b_motion_shift_left(uint8_t *glyph, uint8_t *shifted_glyph);
